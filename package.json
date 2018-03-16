@@ -33,6 +33,6 @@
     "yargs": "^11.0.0"
   },
   "dependencies": {
-    "ember-source": "^3.0.0"
+    "ember-source": "^2.9.1"
   }
 }

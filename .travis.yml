@@ -3,4 +3,6 @@ node_js:
   - node
 script:
   - yarn install
+  - yarn global add bower
+  - bower install
   - yarn build
