@@ -11,8 +11,9 @@ define('ui/components/machine/driver-%%DRIVERNAME%%/component', ['exports', 'emb
         type: '%%DRIVERNAME%%Config',
         apiToken: '',
         serverType: 'cx21', // 4 GB Ram
-        serverLocation: 'fsn1', // Nuremberg
-        image: 'ubuntu-16.04'
+        serverLocation: 'nbg1', // Nuremberg
+        image: 'ubuntu-16.04',
+        userData: ''
       });
 
       let type = 'host';

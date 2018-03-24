@@ -66,6 +66,17 @@
             {{/each}}
           </select>
         </div>
+      </div>
+        <div class="over-hr r-mt20 r-mb20">
+        <span>User data</span>
+      </div>
+      <div class="row form-group">
+          <div class="col-md-2">
+            <label class="form-control-static">Cloud-init Configuration (optional)</label>
+          </div>
+          <div class="col-md-10">       
+            <textarea onchange={{action (mut model.hetznerConfig.userData) value="target.value"}} rows="3" style="width: 100%; resize: vertical"></textarea>
+        </div>
     </div>
     {{!-- This partial contains the Labels and Advanced Options fields --}}
     {{partial "host/add-options"}}
