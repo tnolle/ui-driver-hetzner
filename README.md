@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/mxschmitt/ui-driver-hetzner.svg?branch=v1.6)](https://travis-ci.org/mxschmitt/ui-driver-hetzner)
 
-Rancher UI driver for the [Hetzner Cloud](hetzner.de/cloud)
+Rancher 1 UI driver for the [Hetzner Cloud](hetzner.de/cloud).
+
+For the Rancher 2 UI driver check out the `master` branch [here](https://github.com/mxschmitt/ui-driver-hetzner/tree/master).
 
 ## Using
 
