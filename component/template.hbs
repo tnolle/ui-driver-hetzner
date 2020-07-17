@@ -11,7 +11,8 @@
       <div class="col-md-10">
         {{input type="password" value=model.hetznerConfig.apiToken classNames="form-control" placeholder="Your Hetzner Cloud API Token"}}
         <p class="help-block">Create it by switching into the
-          <a target="_blank" rel="noopener noreferrer" href="https://console.hetzner.cloud">Hetzner Cloud Console</a>, choosing a project, go to Access &rarr; Tokens and create a new API token there.</p>
+          <a target="_blank" rel="noopener noreferrer" href="https://console.hetzner.cloud">Hetzner Cloud Console</a>,
+          choosing a project, go to Access &rarr; Tokens and create a new API token there.</p>
       </div>
     </div>
     {{top-errors errors=errors}}
@@ -20,7 +21,8 @@
       <button class="btn bg-primary btn-disabled">
         <i class="icon icon-spinner icon-spin"></i> {{t 'generic.loading'}}</button>
       {{else}}
-      <button {{action "getData" }} class="btn bg-primary" disabled={{not model.hetznerConfig.apiToken}}>Configure Server</button>
+      <button {{action "getData" }} class="btn bg-primary" disabled={{not model.hetznerConfig.apiToken}}>Configure
+        Server</button>
       {{/if}}
       <button {{action "cancel"}} class="btn bg-transparent">{{t 'generic.cancel'}}</button>
     </div>
@@ -41,7 +43,8 @@
       <div class="col-md-10">
         <select class="form-control" onchange={{action (mut model.hetznerConfig.serverLocation) value="target.value" }}>
           {{#each regionChoices as |choice|}}
-            <option value={{choice.name}} selected={{eq model.hetznerConfig.serverLocation choice.name}}>{{choice.city}}</option>
+          <option value={{choice.name}} selected={{eq model.hetznerConfig.serverLocation choice.name}}>{{choice.city}}
+          </option>
           {{/each}}
         </select>
       </div>
@@ -53,7 +56,8 @@
       <div class="col-md-4">
         <select class="form-control" onchange={{action (mut model.hetznerConfig.imageId) value="target.value" }}>
           {{#each imageChoices as |choice|}}
-            <option value={{choice.id}} selected={{eq model.hetznerConfig.imageId choice.id}}>{{choice.description}}</option>
+          <option value={{choice.id}} selected={{eq model.hetznerConfig.imageId choice.id}}>{{choice.description}}
+          </option>
           {{/each}}
         </select>
       </div>
@@ -63,7 +67,8 @@
       <div class="col-md-4">
         <select class="form-control" onchange={{action (mut model.hetznerConfig.serverType) value="target.value" }}>
           {{#each sizeChoices as |choice|}}
-            <option value={{choice.name}} selected={{eq model.hetznerConfig.serverType choice.name}}>{{choice.description}} - {{choice.memory}}GB Memory - {{choice.disk}}GB Disk space</option>
+          <option value={{choice.name}} selected={{eq model.hetznerConfig.serverType choice.name}}>
+            {{choice.description}} - {{choice.memory}}GB Memory - {{choice.disk}}GB Disk space</option>
           {{/each}}
         </select>
       </div>
@@ -71,19 +76,25 @@
     <div class="row form-group">
       <div class="col-md-2">
         <label class="form-control-static">
-          <a href="https://cloudinit.readthedocs.io/en/latest/topics/examples.html" target="_blank" rel="noopener noreferrer">Cloud-init Configuration</a> (optional)
+          <a href="https://cloudinit.readthedocs.io/en/latest/topics/examples.html" target="_blank"
+            rel="noopener noreferrer">Cloud-init Configuration</a> (optional)
         </label>
       </div>
       <div class="col-md-10">
-        <textarea value={{model.hetznerConfig.userData}} onchange={{action (mut model.hetznerConfig.userData) value="target.value" }} rows="3" style="width: 100%; resize: vertical"></textarea>
+        <textarea value={{model.hetznerConfig.userData}}
+          onchange={{action (mut model.hetznerConfig.userData) value="target.value" }} rows="3"
+          style="width: 100%; resize: vertical"></textarea>
       </div>
       <div class="col-md-2">
-        <label class="form-control-static">Networks (Beta, optional. You have to create these Networks in the <a href="https://console.hetzner.cloud" target="_blank" rel="noopener noreferrer">Hetzner Cloud Console</a>)</label>
+        <label class="form-control-static">Networks (Beta, optional. You have to create these Networks in the <a
+            href="https://console.hetzner.cloud" target="_blank" rel="noopener noreferrer">Hetzner Cloud
+            Console</a>)</label>
       </div>
       <div class="col-md-4">
         <select class="form-control" onchange={{action 'modifyNetworks' }} multiple="true">
           {{#each networkChoices as |network|}}
-          <option value={{network.id}} selected={{array-includes model.hetznerConfig.networks network.id}}>{{network.name}} ({{network.ip_range}})</option>
+          <option value={{network.id}} selected={{array-includes model.hetznerConfig.networks network.id}}>
+            {{network.name}} ({{network.ip_range}})</option>
           {{/each}}
         </select>
       </div>
@@ -94,15 +105,28 @@
           </label>
         </div>
       </div>
+      <div class="col-md-2">
+        <label class="form-control-static">Load Balancers (Beta, optional. You have to create these Load Balancers in
+          the <a href="https://console.hetzner.cloud" target="_blank" rel="noopener noreferrer">Hetzner Cloud
+            Console</a>)</label>
+      </div>
+      <div class="col-md-4">
+        <select class="form-control" onchange={{action 'modifyLoadBalancers' }} multiple="true">
+          {{#each loadBalancerChoices as |lb|}}
+          <option value={{lb.id}} selected={{array-includes model.hetznerConfig.loadBalancers lb.id}}>{{lb.name}}
+            ({{lb.public_net.ipv4.ip}})</option>
+          {{/each}}
+        </select>
+      </div>
     </div>
-     {{!-- This following contains the Name, Labels and Engine Options fields --}}
-     {{form-name-description model=model nameRequired=true}}
-     {{form-user-labels initialLabels=labelResource.labels setLabels=(action 'setLabels') expandAll=expandAll expand=(action expandFn) }}
-     {{form-engine-opts machine=model showEngineUrl=showEngineUrl }}
-     {{!-- This component shows errors produced by validate() in the component --}}
-     {{top-errors errors=errors}}
-     {{!-- This component shows the Create and Cancel buttons --}}
-     {{save-cancel save="save" cancel=(action "cancel")}}
+    {{!-- This following contains the Name, Labels and Engine Options fields --}}
+    {{form-name-description model=model nameRequired=true}}
+    {{form-user-labels initialLabels=labelResource.labels setLabels=(action 'setLabels') expandAll=expandAll expand=(action expandFn) }}
+    {{form-engine-opts machine=model showEngineUrl=showEngineUrl }}
+    {{!-- This component shows errors produced by validate() in the component --}}
+    {{top-errors errors=errors}}
+    {{!-- This component shows the Create and Cancel buttons --}}
+    {{save-cancel save="save" cancel=(action "cancel")}}
   </div>
   {{/if}}
 </section>
